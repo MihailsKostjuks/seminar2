@@ -169,4 +169,37 @@ public class App {
     }
     throw new Exception("Student not found");
   }
+
+  public static void updateStudentSurname(String name, String surname, String newSurname) throws Exception {
+    if (name == null || surname == null) {
+      throw new Exception("Empty parameters");
+    }
+
+    for(Student student: allStudents) {
+      if (student.getName().equals(name) && student.getSurname().equals(surname)) {
+        student.setSurname(newSurname);
+        return;
+      }
+    }
+
+    throw new Exception("Student not found");
+  }
+
+  public static void deleteStudent(String name, String surname) throws Exception {
+    if (name == null || surname == null) {
+      throw new Exception("Empty parameters");
+    }
+
+    for(Student student: allStudents) {
+      if (student.getName().equals(name) && student.getSurname().equals(surname)) {
+        allStudents.remove(student);
+        return;
+      }
+    }
+
+    throw new Exception("Student not found");
+  }
+
+  
+
 }
