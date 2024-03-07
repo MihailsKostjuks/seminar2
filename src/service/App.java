@@ -13,6 +13,7 @@ public class App {
   private static Course courseOne, courseTwo;
   private static Student studOne, studTwo;
   private static ArrayList<Person> people = new ArrayList<>();
+  private static ArrayList<Student> allStudents = new ArrayList<Student>();
 
   public static void main(String[] argv) throws InputException {
     initObjects();
@@ -35,6 +36,9 @@ public class App {
     people.add(studOne);
     people.add(profTwo);
     people.add(studTwo);
+
+    allStudents.add(studOne);
+    allStudents.add(studTwo);
     for (Person p : people) {
       System.out.println(p);
     }
@@ -137,4 +141,23 @@ public class App {
       System.out.println(g);
     }
   }
+
+  // CRUD
+
+  // create
+  public static void createStudent(String name, String surname) throws Exception {
+    if (name == null || surname == null) {
+      throw new Exception("Empty parameters");
+    }
+    for (Student student: allStudents) {
+      if (student.getName().equals(name) && student.getSurname().equals(surname)) {
+        throw new Exception("Student already exists");
+
+      }
+    }
+    Student student = new Student(name, surname);
+    allStudents.add(student);
+  }
+
+  
 }
