@@ -200,6 +200,25 @@ public class App {
     throw new Exception("Student not found");
   }
 
-  
+  public static ArrayList<Student> sortStudentsByAvgGrade() {
+    ArrayList<Student> result = new ArrayList<Student>();
+
+    for (Student student: allStudents) {
+      try {
+        calcAvg(student);
+        result.add(student);
+      } catch (Exception e) {
+        System.out.println(e);
+      }
+    }
+
+    for (int i = 0; i < result.size(); i++) {
+      for (int j = 0; j < result.size(); j++) {
+
+      }
+    }
+
+    return result;
+  }
 
 }
