@@ -159,5 +159,14 @@ public class App {
     allStudents.add(student);
   }
 
-  
+  public static Student retrieveStudentBySurname(String surname) throws Exception {
+    if (surname == null) throw new Exception("Empty surname");
+
+    for(Student student: allStudents) {
+      if (student.getSurname().equals(surname)) {
+        return student;
+      }
+    }
+    throw new Exception("Student not found");
+  }
 }
