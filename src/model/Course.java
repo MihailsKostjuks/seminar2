@@ -2,11 +2,13 @@ package model;
 
 import helper.InputException;
 
+import java.util.ArrayList;
+
 public class Course implements TimestampInterface {
   private final String id;
   private String title;
   private int creditPoints;
-  private Professor professor;
+  private ArrayList<Professor> professors;
 
   private static int counter = 0;
 
@@ -35,19 +37,20 @@ public class Course implements TimestampInterface {
     this.creditPoints = creditPoints;
   }
 
-  public void setProfessor(Professor professor) throws InputException {
-    if (professor == null) {
+  public void setProfessors(ArrayList<Professor> professors) throws InputException {
+    if (professors == null) {
+      this.professors = new ArrayList<Professor>();
       throw new InputException("Professor object cannot be null");
     }
-    this.professor = professor;
+    this.professors = professors;
   }
 
   // CONSTRUCTOR
-  public Course(String title, int creditPoints, Professor professor) throws InputException {
+  public Course(String title, int creditPoints, ArrayList<Professor> professors) throws InputException {
     this.id = generateId();
     setTitle(title);
     setCreditPoints(creditPoints);
-    setProfessor(professor);
+    setProfessors(professors);
     counter++;
   }
 
@@ -64,14 +67,14 @@ public class Course implements TimestampInterface {
     return creditPoints;
   }
 
-  public Professor getProfessor() {
-    return professor;
+  public ArrayList<Professor> getProfessors() {
+    return professors;
   }
 
   // toString and equals
   @Override
   public String toString() {
-    return id + ": " + title + " taught by " + professor.getName() + professor.getSurname();
+    return id + ": " + title + " taught by " + professors;
   }
 
   @Override
@@ -87,5 +90,17 @@ public class Course implements TimestampInterface {
      * same if the titles are the same... We want to avoid copies.
      */
     return ((Course) obj).getTitle() == title;
+  }
+
+  public void addProfessor(Professor professor) {
+    if (!professors.contains(professor)) {
+      professors.add(professor);
+    }
+  }
+
+  public void removeProfessor(Professor professor) {
+    if (!professors.contains(professor)) {
+      professors.remove(professor);
+    }
   }
 }
